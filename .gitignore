@@ -1,10 +1,14 @@
 # VS Code
 .vscode/
 
-# Скомпилированные файлы
-*.o
-*.exe
-*.out
+# Если файлы уже отслеживаются, очистить кэш
+git rm -r --cached .
 
-# Папка сборки
-build/
+# Добавить всё заново (учитывая .gitignore)
+git add .
+
+# Закоммитить
+git commit -m "Обновлён .gitignore, только .cpp и .h файлы"
+
+# Отправить
+git push origin main
