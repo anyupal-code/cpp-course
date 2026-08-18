@@ -131,7 +131,7 @@ int main() {
     std::cout << "Медиана: " << values[4] << "\n";
     
     // ==========================================
-    // 6. Стабильная сортировка (std::stable_sort)
+    // 6. Стабильная сортировка (std::stable_sort) - с сохранением порядка равных
     // ==========================================
     
     struct Person {
@@ -151,6 +151,18 @@ int main() {
                      [](const Person& a, const Person& b) {
                          return a.age < b.age;
                      });
+    // Вывод на экран после сортировки
+    std::cout << "Отсортированный список:\n";
+    for (const auto& person : people) {
+        std::cout << person.name << " - " << person.age << " лет\n";
+    }
+
+    std::cout << "Отсортированный список в одну строку: ";
+    for (const auto& p : people) {
+        std::cout << p.name << "(" << p.age << ") ";
+    }
+    std::cout << "\n"; 
+
     // Результат: Bob(25), David(25), Alice(30), Charlie(30)
     // Обратите внимание: Bob был до David, Alice до Charlie
     // Порядок среди 25-летних и 30-летних сохранился
