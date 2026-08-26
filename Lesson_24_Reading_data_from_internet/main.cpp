@@ -7,7 +7,7 @@
 Чтение данных из интернета — это:
 Процесс, в котором программа на C++ отправляет запрос к удалённому серверу через интернет, получает от него ответ с данными и обрабатывает эти данные для использования в программе.
 
-📌 Простыми словами:
+Простыми словами:
 Это когда программа заходит на сайт/сервер, скачивает оттуда информацию и показывает её пользователю или использует для своих целей.
 
 Три главных шага:
@@ -55,7 +55,7 @@ using json = nlohmann::json;
 // ФУНКЦИЯ 1: Получение координат по названию города
 // ============================================================
 bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
-    std::cout << "  📡 Отправляем запрос на поиск города..." << std::endl;
+    std::cout << "  Отправляем запрос на поиск города..." << std::endl;
     
     Client geoClient("geocoding-api.open-meteo.com");
     std::string url = "/v1/search?name=" + cityName + "&count=1&language=ru";
@@ -64,7 +64,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
     // ============================================================
     // ВЫВОД ПОЛНОГО URL ЗАПРОСА (геокодинг)
     // ============================================================
-    std::cout << "\n  🔗 ЗАПРОС:" << std::endl;
+    std::cout << "\n  ЗАПРОС:" << std::endl;
     std::cout << "  ────────────────────────────────────────────────────" << std::endl;
     std::cout << "  https://geocoding-api.open-meteo.com" << url << std::endl;
     std::cout << "  ────────────────────────────────────────────────────\n" << std::endl;
@@ -72,19 +72,19 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
     auto res = geoClient.Get(url);
     
     if (!res) {
-        std::cout << "  ❌ Ошибка: сервер геокодинга не отвечает" << std::endl;
+        std::cout << "  Ошибка: сервер геокодинга не отвечает" << std::endl;
         return false;
     }
     
     if (res->status != 200) {
-        std::cout << "  ❌ Ошибка: сервер вернул код " << res->status << std::endl;
+        std::cout << "  Ошибка: сервер вернул код " << res->status << std::endl;
         return false;
     }
     
     // ============================================================
     // ВЫВОД СЫРОГО JSON ОТВЕТА (геокодинг)
     // ============================================================
-    std::cout << "  📄 Сырой JSON ответ (геокодинг):" << std::endl;
+    std::cout << "  Сырой JSON ответ (геокодинг):" << std::endl;
     std::cout << "  ────────────────────────────────────────────────────" << std::endl;
     
     if (res->body.length() > 500) {
@@ -114,7 +114,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
         json data = json::parse(res->body);
         
         if (data["results"].empty()) {
-            std::cout << "  ❌ Город \"" << cityName << "\" не найден!" << std::endl;
+            std::cout << "  Город \"" << cityName << "\" не найден!" << std::endl;
             return false;
         }
         
@@ -124,7 +124,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
         std::string country = data["results"][0]["country"];
         std::string name = data["results"][0]["name"];
         
-        std::cout << "  ✅ Город найден!" << std::endl;
+        std::cout << "  Город найден!" << std::endl;
         std::cout << "     Название: " << name << std::endl;
         std::cout << "     Страна: " << country << std::endl;
         std::cout << "     Координаты: " << std::fixed << std::setprecision(4) 
@@ -133,7 +133,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
         return true;
         
     } catch (const std::exception& e) {
-        std::cout << "  ❌ Ошибка парсинга JSON: " << e.what() << std::endl;
+        std::cout << "  Ошибка парсинга JSON: " << e.what() << std::endl;
         return false;
     }
 }
@@ -142,7 +142,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
 // ФУНКЦИЯ 2: Получение погоды по координатам
 // ============================================================
 bool getWeather(double lat, double lon, double& temperature, std::string& weatherCode) {
-    std::cout << "  📡 Отправляем запрос на получение погоды..." << std::endl;
+    std::cout << "  Отправляем запрос на получение погоды..." << std::endl;
     
     Client weatherClient("api.open-meteo.com");
     std::string url = "/v1/forecast?latitude=" + std::to_string(lat) +
@@ -152,7 +152,7 @@ bool getWeather(double lat, double lon, double& temperature, std::string& weathe
     // ============================================================
     // ВЫВОД ПОЛНОГО URL ЗАПРОСА (погода)
     // ============================================================
-    std::cout << "\n  🔗 ЗАПРОС:" << std::endl;
+    std::cout << "\n  ЗАПРОС:" << std::endl;
     std::cout << "  ────────────────────────────────────────────────────" << std::endl;
     std::cout << "  https://api.open-meteo.com" << url << std::endl;
     std::cout << "  ────────────────────────────────────────────────────\n" << std::endl;
@@ -160,19 +160,19 @@ bool getWeather(double lat, double lon, double& temperature, std::string& weathe
     auto res = weatherClient.Get(url);
     
     if (!res) {
-        std::cout << "  ❌ Ошибка: сервер погоды не отвечает" << std::endl;
+        std::cout << "  Ошибка: сервер погоды не отвечает" << std::endl;
         return false;
     }
     
     if (res->status != 200) {
-        std::cout << "  ❌ Ошибка: сервер вернул код " << res->status << std::endl;
+        std::cout << "  Ошибка: сервер вернул код " << res->status << std::endl;
         return false;
     }
     
     // ============================================================
     // ВЫВОД СЫРОГО JSON ОТВЕТА (погода)
     // ============================================================
-    std::cout << "  📄 Сырой JSON ответ (погода):" << std::endl;
+    std::cout << "  Сырой JSON ответ (погода):" << std::endl;
     std::cout << "  ────────────────────────────────────────────────────" << std::endl;
     
     if (res->body.length() > 500) {
@@ -190,14 +190,14 @@ bool getWeather(double lat, double lon, double& temperature, std::string& weathe
         int code = data["current_weather"]["weathercode"];
         weatherCode = std::to_string(code);
         
-        std::cout << "  ✅ Данные о погоде получены!" << std::endl;
-        std::cout << "     Температура: " << temperature << "°C" << std::endl;
-        std::cout << "     Код погоды: " << code << std::endl;
+        std::cout << "Данные о погоде получены!" << std::endl;
+        std::cout << "Температура: " << temperature << "°C" << std::endl;
+        std::cout << "Код погоды: " << code << std::endl;
         
         return true;
         
     } catch (const std::exception& e) {
-        std::cout << "  ❌ Ошибка парсинга JSON: " << e.what() << std::endl;
+        std::cout << "  Ошибка парсинга JSON: " << e.what() << std::endl;
         return false;
     }
 }
@@ -265,46 +265,46 @@ std::string getWeatherDescription(int code) {
 int main() {
     std::cout << "\n";
     std::cout << "╔═══════════════════════════════════════════════════╗" << std::endl;
-    std::cout << "║     🌤️  УЗНАТЬ ПОГОДУ В ЛЮБОМ ГОРОДЕ              ║" << std::endl;
+    std::cout << "║           УЗНАТЬ ПОГОДУ В ЛЮБОМ ГОРОДЕ            ║" << std::endl;
     std::cout << "╚═══════════════════════════════════════════════════╝" << std::endl;
     std::cout << "\n";
     
     std::string city;
-    std::cout << "  🏙️  Введите название города: ";
+    std::cout << "Введите название города: ";
     std::getline(std::cin, city);
     
     if (city.empty()) {
-        std::cout << "  ❌ Название города не может быть пустым!" << std::endl;
+        std::cout << "Название города не может быть пустым!" << std::endl;
         return 1;
     }
     
     std::cout << "\n";
     std::cout << "════════════════════════════════════════════════════" << std::endl;
-    std::cout << "📋 ИНФОРМАЦИЯ ДЛЯ ЗАПРОСА:" << std::endl;
-    std::cout << "   Город: " << city << std::endl;
+    std::cout << "ИНФОРМАЦИЯ ДЛЯ ЗАПРОСА:" << std::endl;
+    std::cout << "Город: " << city << std::endl;
     std::cout << "════════════════════════════════════════════════════" << std::endl;
     std::cout << "\n";
     
     // ШАГ 1: Получаем координаты
-    std::cout << "📍 ШАГ 1: Поиск координат города" << std::endl;
+    std::cout << "ШАГ 1: Поиск координат города" << std::endl;
     std::cout << "────────────────────────────────────────────────────" << std::endl;
     
     double lat, lon;
     if (!getCoordinates(city, lat, lon)) {
-        std::cout << "\n❌ Не удалось получить координаты. Проверьте название города." << std::endl;
+        std::cout << "\nНе удалось получить координаты. Проверьте название города." << std::endl;
         return 1;
     }
     
     std::cout << "\n";
     
     // ШАГ 2: Получаем погоду
-    std::cout << "🌡️  ШАГ 2: Получение данных о погоде" << std::endl;
+    std::cout << "ШАГ 2: Получение данных о погоде" << std::endl;
     std::cout << "────────────────────────────────────────────────────" << std::endl;
     
     double temperature;
     std::string weatherCode;
     if (!getWeather(lat, lon, temperature, weatherCode)) {
-        std::cout << "\n❌ Не удалось получить данные о погоде." << std::endl;
+        std::cout << "\nНе удалось получить данные о погоде." << std::endl;
         return 1;
     }
     
@@ -312,20 +312,19 @@ int main() {
     
     // ШАГ 3: Выводим результат
     std::cout << "════════════════════════════════════════════════════" << std::endl;
-    std::cout << "🎯 РЕЗУЛЬТАТ:" << std::endl;
+    std::cout << "РЕЗУЛЬТАТ:" << std::endl;
     std::cout << "════════════════════════════════════════════════════" << std::endl;
     
     int code = std::stoi(weatherCode);
     std::string description = getWeatherDescription(code);
     
-    std::cout << "   🏙️  Город:        " << city << std::endl;
-    std::cout << "   📍 Координаты:   " << std::fixed << std::setprecision(4) 
-              << lat << ", " << lon << std::endl;
-    std::cout << "   🌡️  Температура:  " << temperature << "°C" << std::endl;
-    std::cout << "   🌤️  Погода:       " << description << std::endl;
+    std::cout << "Город:        " << city << std::endl;
+    std::cout << "Координаты:   " << std::fixed << std::setprecision(4) << lat << ", " << lon << std::endl;
+    std::cout << "Температура:  " << temperature << "°C" << std::endl;
+    std::cout << "Погода:       " << description << std::endl;
     std::cout << "════════════════════════════════════════════════════" << std::endl;
     
-    std::cout << "\n✅ Программа завершена!" << std::endl;
+    std::cout << "\nПрограмма завершена!" << std::endl;
     
     return 0;
 }
