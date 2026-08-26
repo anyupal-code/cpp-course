@@ -1,4 +1,3 @@
-
 // Lesson 24: Reading_data_from_internet
 
 // Чтение данных из интернета
