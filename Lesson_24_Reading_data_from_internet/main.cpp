@@ -20,7 +20,7 @@
 - Библиотека для HTTP — чтобы отправлять запросы
 - Библиотека для JSON — чтобы разбирать ответы
 
-POST — это метод HTTP, который используется для отправки данных на сервер. 
+GET — это метод HTTP, который используется для запроса данных с сервера. 
 JSON (JavaScript Object Notation) — это формат для хранения и передачи данных в виде текста, который понятен и человеку, и компьютеру.
 
 Самый частый запрос — GET (просто получить данные)
@@ -50,6 +50,14 @@ https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
 
 using namespace httplib;
 using json = nlohmann::json;
+
+/*
+using json = nlohmann::json;
+Это алиас типа (type alias), который создается с помощью using в C++11 и новее.
+Конкретно эта строка - Создает сокращенное имя json для типа nlohmann::json
+Теперь вместо написания полного имени nlohmann::json можно писать просто json
+Для использования функционала файла #include "json.hpp"
+*/
 
 // ============================================================
 // ФУНКЦИЯ 1: Получение координат по названию города
@@ -114,7 +122,7 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
         json data = json::parse(res->body);
         
         if (data["results"].empty()) {
-            std::cout << "  Город \"" << cityName << "\" не найден!" << std::endl;
+            std::cout << "Город \"" << cityName << "\" не найден!" << std::endl;
             return false;
         }
         
@@ -124,16 +132,16 @@ bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
         std::string country = data["results"][0]["country"];
         std::string name = data["results"][0]["name"];
         
-        std::cout << "  Город найден!" << std::endl;
-        std::cout << "     Название: " << name << std::endl;
-        std::cout << "     Страна: " << country << std::endl;
-        std::cout << "     Координаты: " << std::fixed << std::setprecision(4) 
+        std::cout << "Город найден!" << std::endl;
+        std::cout << "Название: " << name << std::endl;
+        std::cout << "Страна: " << country << std::endl;
+        std::cout << "Координаты: " << std::fixed << std::setprecision(4) 
                   << lat << ", " << lon << std::endl;
         
         return true;
         
     } catch (const std::exception& e) {
-        std::cout << "  Ошибка парсинга JSON: " << e.what() << std::endl;
+        std::cout << "Ошибка парсинга JSON: " << e.what() << std::endl;
         return false;
     }
 }
