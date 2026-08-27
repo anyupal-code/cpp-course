@@ -63,6 +63,9 @@ using json = nlohmann::json;
 // ФУНКЦИЯ 1: Получение координат по названию города
 // ============================================================
 bool getCoordinates(const std::string& cityName, double& lat, double& lon) {
+    /*
+    Передаём не пустые значения, а переменные, в которые функция запишет результат - передача по ссылке (reference parameters).
+    */
     std::cout << "  Отправляем запрос на поиск города..." << std::endl;
     
     Client geoClient("geocoding-api.open-meteo.com");
