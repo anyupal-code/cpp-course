@@ -1,0 +1,29 @@
+# Исполняемые файлы
+main
+*.exe
+*.out
+*.app
+a.out
+
+# Объектные файлы
+*.o
+*.obj
+
+# Папки сборки
+build/
+bin/
+Debug/
+Release/
+cmake-build-*/
+
+# Файлы IDE
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Временные файлы
+*.tmp
+*.log
+*.swp
+*~
